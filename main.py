@@ -27,7 +27,7 @@ class EdupageClient:
 
         #740x532
         self.login_formular.setGeometry(300, 200, 740/2 - 25, 532/2 - 25)
-        # self.login_formular.setFixedSize(self.login_formular.size())
+        self.login_formular.setFixedSize(self.login_formular.size())
         self.login_formular.setWindowTitle("Edupage Client: Login ")
 
         # Widgety
