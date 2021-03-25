@@ -10,5 +10,5 @@
 We provide nearly every feature from the well known Edupage used on mobile devices and browsers.
 ---
 # Main Contributors
-* Tomáš Lovrant (https://github.com/tomuisgod)
-* Adam Vlčko (https://github.com/vlckoadam)
+* [Tomáš Lovrant](https://github.com/tomuisgod)
+* [Adam Vlčko](https://github.com/vlckoadam)
