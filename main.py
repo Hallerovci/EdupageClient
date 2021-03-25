@@ -14,8 +14,8 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from PyQt5.QtWidgets import QGridLayout, QSizePolicy, QLineEdit
-from edupage_api import Edupage, BadCredentialsException
+from PyQt5.QtWidgets import QGridLayout, QSizePolicy, QLineEdit, QMessageBox
+from edupage_api import Edupage, BadCredentialsException, LoginDataParsingException, EduStudent
 from PyQt5 import QtWidgets, QtCore, QtGui
 import sys
 
@@ -49,12 +49,17 @@ class EdupageClient:
         self.submit_button = QtWidgets.QPushButton("Login")
         self.submit_button.clicked.connect(self.login)
 
+        self.about_button = QtWidgets.QPushButton("About")
+        self.about_button.clicked.connect(self.about)
+
+
         # Layouty
         self.login_grid = QGridLayout()
         self.domain_box = QtWidgets.QHBoxLayout()
         self.user_box = QtWidgets.QHBoxLayout()
         self.pass_box = QtWidgets.QHBoxLayout()
         self.submit_box = QtWidgets.QHBoxLayout()
+        self.about_box = QtWidgets.QHBoxLayout()
 
         # Maintain main layout
         self.login_layout.addLayout(self.login_grid)
@@ -70,6 +75,10 @@ class EdupageClient:
         self.login_layout.addStretch()
         self.login_layout.addLayout(self.submit_box)
 
+        # self.login_layout.addStretch()
+        self.login_layout.addLayout(self.about_box)
+
+
         # Add widgets
         self.login_grid.addWidget(self.text, 0, 0)
 
@@ -84,12 +93,78 @@ class EdupageClient:
 
         self.submit_box.addWidget(self.submit_button)
 
+        self.about_box.addWidget(self.about_button)
+
         self.login_formular.setLayout(self.login_layout)
         self.login_formular.show()
         sys.exit(self.app.exec_())
 
     def login(self):
-        self.text.setText("TODO: Login spracovat")
+        # 1. self.domain_edit 2. self.user_edit 3. self.pass_edit
+        domain = self.domain_edit.text()
+        user = self.user_edit.text()
+        password = self.pass_edit.text()
+
+        try:
+            self.edu = Edupage(domain, user, password)
+            try:
+                self.edu.login()
+                self.login_formular.hide()
+
+                EdupageClientIndex(self)
+            except BadCredentialsException:
+                self.render_err("Bad credentials", "Check login credentials (username/password)!")
+            except LoginDataParsingException:
+                self.render_err("Login data parsing", "Check internet connection, try again later or contact server "
+                                                      "administrators!")
+        except UnicodeError:
+            return
+        except IndexError:
+            self.render_err("Indexing error", "Check entered domain, if correct then check internet connection or est!")
+
+    def about(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("EdupageClient Version: 0.1\n\nEdupageClient Copyright (C) MMXXI \nTomáš Lovrant & Adam "
+                    "Vlčko\n\nThis program comes "
+                    "with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under "
+                    "the terms of the GNU General Public License as published by "
+                    "the Free Software Foundation, either version 3 of the License, or "
+                    "(at your option) any later version.\nSee: https://www.gnu.org/licenses/\n\nClick on Show Details "
+                    "... for more information.")
+        msg.setDetailedText("THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT "
+                            "WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE "
+                            "PROGRAM \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, "
+                            "BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A "
+                            "PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS "
+                            "WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY "
+                            "SERVICING, REPAIR OR CORRECTION.")
+        msg.setWindowTitle("About EdupageClient")
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setEscapeButton(QMessageBox.Ok)
+        msg.exec_()
+
+    def render_err(self, title, description):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText(description)
+        msg.setWindowTitle(title)
+        msg.setStandardButtons(QMessageBox.Retry)
+        msg.setEscapeButton(QMessageBox.Retry)
+        msg.exec_()
+
+
+class EdupageClientIndex:
+    def __init__(self, edupageclient):
+        self.edupageclient = edupageclient
+        self.app = QtWidgets.QApplication(sys.argv)
+        self.index_formular = QtWidgets.QWidget()
+        self.index_layout = QtWidgets.QVBoxLayout()
+        self.index_formular.setWindowTitle("Edupage Client: Main")
+
+        self.index_formular.setLayout(self.index_layout)
+        self.index_formular.show()
+        #sys.exit(self.app.exec_())
 
 
 EdupageClient()
