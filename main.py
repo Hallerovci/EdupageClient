@@ -159,11 +159,13 @@ class EdupageClientIndex:
         self.index_formular = QtWidgets.QWidget()
         self.index_layout = QtWidgets.QVBoxLayout()
         self.index_formular.setWindowTitle("Edupage Client: Main")
+        self.index_formular.setGeometry(300, 200, 740 / 2 - 25, 532 / 2 - 25)
+        self.index_formular.setFixedSize(self.index_formular.size())
 
         self.index_formular.setLayout(self.index_layout)
         self.index_formular.show()
-        self.edupageclient.login_formular.hide()
-        #sys.exit(self.edupageclient.app.exec_())
+        #self.edupageclient.login_formular.hide()
+        # sys.exit(self.edupageclient.app.exec_())
 
 
 EdupageClient()
