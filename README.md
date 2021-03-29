@@ -10,7 +10,9 @@
 We provide nearly every feature from the well known Edupage used on mobile devices and browsers.
 
 <div align="center">
-    <h1>Main Contributors</h1> 
+    <h1>Main Contributors</h1>
+    
 </div>
-* [Tomáš Lovrant](https://github.com/tomuisgod)
-* [Adam Vlčko](https://github.com/vlckoadam)
+<a href="https://github.com/tomuisgod"><h3>Tomáš Lovrant</h3>
+<br>
+<a href="https://github.com/vlckoadam"><h3>Adam Vlčko</h3>
