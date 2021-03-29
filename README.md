@@ -14,5 +14,4 @@ We provide nearly every feature from the well known Edupage used on mobile devic
     
 </div>
 <a href="https://github.com/tomuisgod"><h3>Tomáš Lovrant</h3>
-<br>
 <a href="https://github.com/vlckoadam"><h3>Adam Vlčko</h3>
