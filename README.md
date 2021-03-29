@@ -12,5 +12,6 @@ We provide nearly every feature from the well known Edupage used on mobile devic
 <div align="center">
     <h1>Main Contributors</1> 
 </div>
+## 
 * [Tomáš Lovrant](https://github.com/tomuisgod)
 * [Adam Vlčko](https://github.com/vlckoadam)
