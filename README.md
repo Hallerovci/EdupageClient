@@ -9,9 +9,6 @@
 **Edupage Client** is desktop application made in python using *edupage-api*. 
 We provide nearly every feature from the well known Edupage used on mobile devices and browsers.
 
-<div align="center">
-    <h1>Main Contributors</h1>
-    
-</div>
-<a href="https://github.com/tomuisgod"><h3>Tomáš Lovrant</h3></a>
-<a href="https://github.com/vlckoadam"><h3>Adam Vlčko</h3></a>
+# Main Contributors
+* [Tomáš Lovrant](https://github.com/tomuisgod)
+* [Adam Vlčko](https://github.com/vlckoadam)
