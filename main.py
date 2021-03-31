@@ -109,8 +109,10 @@ class EdupageClient:
             self.edu = Edupage(domain, user, password)
             try:
                 self.edu.login()
+                self.login_formular.hide()
+                eci = EdupageClientIndex(self)
+                eci.index_formular.show()
 
-                EdupageClientIndex(self)
             except BadCredentialsException:
                 self.render_err("Bad credentials", "Check login credentials (username/password)!")
             except LoginDataParsingException:
@@ -155,16 +157,14 @@ class EdupageClient:
 
 class EdupageClientIndex:
     def __init__(self, edupageclient):
-        self.edupageclient = edupageclient
+        #self.edupageclient = edupageclient
         self.index_formular = QtWidgets.QWidget()
         self.index_layout = QtWidgets.QVBoxLayout()
         self.index_formular.setWindowTitle("Edupage Client: Main")
-        self.index_formular.setGeometry(300, 200, 740 / 2 - 25, 532 / 2 - 25)
+        self.index_formular.setGeometry(300, 200, 345, 245)
         self.index_formular.setFixedSize(self.index_formular.size())
-
         self.index_formular.setLayout(self.index_layout)
-        self.index_formular.show()
-        #self.edupageclient.login_formular.hide()
+
         # sys.exit(self.edupageclient.app.exec_())
 
 
