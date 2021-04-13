@@ -18,6 +18,7 @@ from PyQt5.QtWidgets import QGridLayout, QSizePolicy, QLineEdit, QMessageBox
 from edupage_api import Edupage, BadCredentialsException, LoginDataParsingException, EduStudent
 from PyQt5 import QtWidgets, QtCore, QtGui
 import sys
+import pygame
 
 class EdupageClient:
     def __init__(self):
